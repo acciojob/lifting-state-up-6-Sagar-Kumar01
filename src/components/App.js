@@ -11,9 +11,10 @@ const App = () => {
   ]);
 
   const handleComplete = (id) => {
-  const updatedTodos = todos.map((todo) =>
-    todo.id === id ? { ...todo, completed: true } : todo
-  );
+  const updatedTodos = todos.map(todo => ({
+  ...todo,
+  completed: true
+   }));
   setTodos(updatedTodos);
 };
   return (
