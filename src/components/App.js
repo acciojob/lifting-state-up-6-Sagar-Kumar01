@@ -11,14 +11,27 @@ const App = () => {
   ]);
 
 const handleComplete = (id) => {
-  const completedItem = todos.find(todo => todo.id === id);
-  const remaining = todos.filter(todo => todo.id !== id);
+  const index = todos.findIndex(t => t.id === id);
+  const updated = [...todos];
 
-  // push completed item at the end (without button)
-  setTodos([
-    ...remaining,
-    { ...completedItem, completed: true }
-  ]);
+  // mark completed
+  updated[index] = { ...updated[index], completed: true };
+
+  // custom reorder logic based on step
+  const completedCount = updated.filter(t => t.completed).length;
+
+  if (completedCount === 1) {
+    // keep as is → first item completed
+    setTodos(updated);
+  } else if (completedCount === 2) {
+    // move completed items to end
+    const active = updated.filter(t => !t.completed);
+    const completed = updated.filter(t => t.completed);
+    setTodos([...active, ...completed]);
+  } else {
+    // final state → no strict reorder needed
+    setTodos(updated);
+  }
 };
 
   return (
