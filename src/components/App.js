@@ -11,11 +11,14 @@ const App = () => {
   ]);
 
 const handleComplete = (id) => {
-  setTodos(prev =>
-    prev.map(todo =>
-      todo.id === id ? { ...todo, completed: true } : todo
-    )
-  );
+  const completedItem = todos.find(todo => todo.id === id);
+  const remaining = todos.filter(todo => todo.id !== id);
+
+  // push completed item at the end (without button)
+  setTodos([
+    ...remaining,
+    { ...completedItem, completed: true }
+  ]);
 };
 
   return (
