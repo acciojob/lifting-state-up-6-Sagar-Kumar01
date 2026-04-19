@@ -11,9 +11,7 @@ const App = () => {
   ]);
 
 const handleComplete = (id) => {
-  const updatedTodos = todos.map(todo =>
-    todo.id === id ? { ...todo, completed: true } : todo
-  );
+  const updatedTodos = todos.filter(todo => todo.id !== id);
   setTodos(updatedTodos);
 };
   return (
