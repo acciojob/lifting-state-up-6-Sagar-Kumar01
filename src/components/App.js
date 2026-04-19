@@ -11,8 +11,15 @@ const App = () => {
   ]);
 
 const handleComplete = (id) => {
-  const updatedTodos = todos.filter(todo => todo.id !== id);
-  setTodos(updatedTodos);
+  const updatedTodos = todos.map(todo =>
+    todo.id === id ? { ...todo, completed: true } : todo
+  );
+
+  
+  const active = updatedTodos.filter(t => !t.completed);
+  const completed = updatedTodos.filter(t => t.completed);
+
+  setTodos([...active, ...completed]);
 };
   return (
     <div>
