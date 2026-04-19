@@ -11,16 +11,13 @@ const App = () => {
   ]);
 
 const handleComplete = (id) => {
-  const updatedTodos = todos.map(todo =>
-    todo.id === id ? { ...todo, completed: true } : todo
+  setTodos(prev =>
+    prev.map(todo =>
+      todo.id === id ? { ...todo, completed: true } : todo
+    )
   );
-
-  
-  const active = updatedTodos.filter(t => !t.completed);
-  const completed = updatedTodos.filter(t => t.completed);
-
-  setTodos([...active, ...completed]);
 };
+
   return (
     <div>
         {/* Do not remove the main div */}
